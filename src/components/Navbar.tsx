@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
+import Link from "next/link"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -74,12 +75,12 @@ const Navbar = () => {
           >
             Process,
           </a>
-          <a
+          <Link
             className={`${scrolled ? "text-foreground/90 hover:text-foreground" : "text-white/90 hover:text-white"}`}
             href="/blogs"
           >
             Blogs
-          </a>
+          </Link>
         </motion.nav>
 
         <div className="flex items-center gap-3">
