@@ -23,10 +23,9 @@ const lora = Lora({
   weight: ["400", "700"],
 });
 
-
 export const metadata: Metadata = {
-  title: "VÉRA Architecture",
-  description: "VÉRA Architecture - The best Architectures in hood.",
+  title: "VÉR Architecture",
+  description: "VÉR Architecture - The best Architectures in hood.",
 };
 
 export default function RootLayout({

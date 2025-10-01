@@ -1,16 +1,19 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 const BlogCard = () => {
   return (
     <Link href={"/blogs/1"} passHref>
       <div className="w-full h-96">
-        <div className="w-full h-[90%]">
-          <img
+        <div className="w-full h-[90%] relative">
+          <Image
             src="/blogs/blog1.jfif"
             alt="blogImg"
-            className="w-full h-full"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover"
           />
         </div>
         <div className="w-full flex justify-between gap-5 px-1 mt-2 text-zinc-600 text-sm">

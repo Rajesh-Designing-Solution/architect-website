@@ -1,11 +1,12 @@
 import BlogCard from "@/components/BlogCard";
+import Image from "next/image";
 
 export default function BlogId() {
   return (
     <div className="bg-color">
       <div className="w-full flex flex-col md:flex-row">
-        <div id="left" className="w-full md:w-1/2 h-screen bg-amber-500">
-          <img src="/blogs/blogId1.0.jfif" alt="" className="w-full h-full" />
+        <div id="left" className="w-full md:w-1/2 h-screen bg-amber-500 relative">
+          <Image src="/blogs/blogId1.0.jfif" alt="" fill className="object-cover" />
         </div>
         <div
           id="right"
@@ -38,7 +39,7 @@ export default function BlogId() {
 
           {/* <div className="mt-32 w-[70%]">
             <h4 className="text-lg text-zinc-600">
-              A stone's throw from the Eiffel Tower, in a residence from the
+              A stone&apos;s throw from the Eiffel Tower, in a residence from the
               1960s, this project is fully in line with the subjects that the
               agency likes: promoting the existing, dealing with its qualities
               as well as its constraints, and revealing the potential of a place
@@ -52,17 +53,17 @@ export default function BlogId() {
 
       <div className="w-[80%] md:w-[50%] mx-auto py-10 md:py-28 flex flex-col space-y-4 text-lg text-zinc-600">
         <h4>
-          A stone's throw from the Eiffel Tower, in a residence from the 1960s,
+          A stone&apos;s throw from the Eiffel Tower, in a residence from the 1960s,
           this project is fully in line with the subjects that the agency likes:
           promoting the existing, dealing with its qualities as well as its
           constraints, and revealing the potential of a place sometimes
           forgotten.
         </h4>
         <h4>
-          Located a stone's throw from the Eiffel Tower, in a residence from the
+          Located a stone&apos;s throw from the Eiffel Tower, in a residence from the
           1960s, this project illustrates a type of intervention dear to the
           agency: working with what already exists, revealing its qualities,
-          while dealing with the constructive constraints of the 'era.{" "}
+          while dealing with the constructive constraints of the &apos;era.{" "}
         </h4>
         <h4>
           The apartment has undeniable advantages –large bay windows, mosaic
@@ -92,16 +93,12 @@ export default function BlogId() {
       </div>
 
       <div className="flex items-center justify-center max-w-4xl mx-auto gap-6 h-48 md:h-96">
-        <img
-          src="/blogs/blogId1.1.jfif"
-          alt="blogIdImg"
-          className="object-cover h-full"
-        />
-        <img
-          src="/blogs/blogId1.2.jfif"
-          alt="blogIdImg"
-          className="object-cover h-full"
-        />
+        <div className="relative h-full w-full">
+          <Image src="/blogs/blogId1.1.jfif" alt="blogIdImg" fill sizes="(max-width: 768px) 50vw, 33vw" className="object-cover" />
+        </div>
+        <div className="relative h-full w-full">
+          <Image src="/blogs/blogId1.2.jfif" alt="blogIdImg" fill sizes="(max-width: 768px) 50vw, 33vw" className="object-cover" />
+        </div>
       </div>
 
       <div className="max-w-5xl mx-auto px-8 lg:px-0 py-24">

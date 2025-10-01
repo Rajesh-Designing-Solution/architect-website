@@ -4,40 +4,36 @@
 @font-face {
   font-family: "Fakt";
   src: url("/fonts/faktNormal.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Fakt";
   src: url("/fonts/faktMedium.woff2") format("woff2");
-  font-weight: 500 600;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Roboto Local";
   src: url("/fonts/roboto.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Roboto Local";
   src: url("/fonts/robotoMedium.woff2") format("woff2");
-  font-weight: 500 600;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Thin Local";
   src: url("/fonts/thin.woff2") format("woff2");
-  font-weight: 100 200;
-  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP";
+  src: url("/fonts/PP.woff2") format("woff2");
   font-display: swap;
 }
 
@@ -56,27 +52,45 @@
   font-family: var(--font-lora), serif;
 }
 
-
-.bg-color{
+.bg-color {
   background-color: #f8f6e8;
 }
 
-.heading-color{
-  color:#1a1a1a;
+.heading-color {
+  color: #1a1a1a;
 }
 
-.text-color{
- color: #222222;
+.text-color {
+  color: #222222;
 }
 
 /* Default body font to local Fakt Normal */
 body {
   font-family: "Fakt", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background-color: #f8f6e8;
 }
 
 /* Local font utility classes */
-.font-faktnormal { font-family: "Fakt", sans-serif; font-weight: 400; }
-.font-faktmedium { font-family: "Fakt", sans-serif; font-weight: 500; }
-.font-roboto { font-family: "Roboto Local", sans-serif; font-weight: 400; }
-.font-robotomedium { font-family: "Roboto Local", sans-serif; font-weight: 500; }
-.font-thin { font-family: "Thin Local", sans-serif; font-weight: 100; }
+.font-faktnormal {
+  font-family: "Fakt", sans-serif;
+}
+.font-faktmedium {
+  font-family: "Fakt", sans-serif;
+}
+.font-roboto {
+  font-family: "Roboto Local", sans-serif;
+}
+.font-robotomedium {
+  font-family: "Roboto Local", sans-serif;
+}
+.font-thinn {
+  font-family: "Thin Local", sans-serif;
+}
+.pp {
+  font-family: "PP", sans-serif;
+}
+
+/* Alias to match JSX class usage */
+.font-pp {
+  font-family: "PP", sans-serif;
+}

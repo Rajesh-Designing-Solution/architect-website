@@ -1,7 +1,5 @@
 import BlogCard from "@/components/BlogCard";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+ 
 
 const Blogs = () => {
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -19,8 +17,8 @@ const Blogs = () => {
 
       <div className="mt-20 ">
         <div id="images" className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16">
-          {array.map((item) => (
-            <BlogCard />
+          {array.map((n) => (
+            <BlogCard key={n} />
           ))}
         </div>
       </div>

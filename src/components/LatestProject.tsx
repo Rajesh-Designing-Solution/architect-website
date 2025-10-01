@@ -21,7 +21,7 @@ const projects: Project[] = [
     description: "A light-filled space blending industrial elements and warm textures, designed for flexible living.",
     category: "Residential",
     location: "New York",
-    image: '/hero/interior1.jpg',
+    image: '/images/interior1.jpg',
     year: "2024",
     details: "This transformation of a 1920s industrial warehouse merges original architectural elements with contemporary comfort. Exposed steel beams and brick walls create dramatic contrast against soft furnishings and natural wood, while floor-to-ceiling windows flood the open-plan space with natural light."
   },
@@ -31,7 +31,7 @@ const projects: Project[] = [
     description: "Minimalist bedroom retreat embracing hygge principles with natural materials and soft textures.",
     category: "Residential",
     location: "Copenhagen",
-    image:'/hero/interior2.jpg',
+    image:'/images/interior2.jpg',
     year: "2024",
     details: "Inspired by Nordic design philosophy, this bedroom creates a sanctuary of calm. Natural oak, linen textiles, and a muted palette establish tranquility, while strategic lighting enhances the room's versatile ambiance from dawn to dusk."
   },
@@ -41,7 +41,7 @@ const projects: Project[] = [
     description: "Contemporary luxury kitchen combining functionality with timeless elegance and artisan details.",
     category: "Residential",
     location: "Los Angeles",
-    image: '/hero/interior3.jpg',
+    image: '/images/interior3.jpg',
     year: "2023",
     details: "A chef's dream realized through meticulous planning and premium materials. Italian marble countertops, custom brass hardware, and integrated smart appliances deliver both visual drama and practical efficiency for serious home cooking."
   },
@@ -51,7 +51,7 @@ const projects: Project[] = [
     description: "Sophisticated workspace merging productivity with literary charm through custom millwork.",
     category: "Commercial",
     location: "London",
-    image:'/hero/interior1.jpg',
+    image:'/images/interior1.jpg',
     year: "2023",
     details: "Floor-to-ceiling oak shelving creates an immersive library atmosphere while maintaining modern work functionality. Integrated lighting, acoustic panels, and ergonomic custom furniture support focused productivity in elegant surroundings."
   },
@@ -61,7 +61,7 @@ const projects: Project[] = [
     description: "Bright, contemporary gathering space emphasizing comfort and connection with nature.",
     category: "Residential",
     location: "San Francisco",
-    image:"/hero/interior3.jpg",
+    image:"/images/interior3.jpg",
     year: "2024",
     details: "Large windows frame city views while abundant plants bring nature inside. Modular seating arrangements adapt to various social configurations, and warm neutrals with natural textures create an inviting atmosphere for daily life and entertaining."
   },
@@ -71,14 +71,82 @@ const projects: Project[] = [
     description: "Luxurious bathroom retreat featuring natural stone, organic materials, and zen aesthetics.",
     category: "Residential",
     location: "Miami",
-    image: '/hero/interior2.jpg',
+    image: '/images/interior2.jpg',
     year: "2023",
     details: "A private wellness retreat incorporating spa principles into residential design. Natural stone tiles, a statement soaking tub, and integrated greenery create a sensory experience that transforms daily routines into restorative rituals."
   }
 ];
 
+// Helper to render a row with a custom grid pattern
+function ProjectRow({
+  items,
+  pattern,
+  onClick,
+}: {
+  items: Project[];
+  pattern: "2-1-1" | "1-1-2";
+  onClick: (project: Project) => void;
+}) {
+  // Use CSS grid with custom template columns for 2fr 1fr 1fr or 1fr 1fr 2fr
+  const colsClass =
+    pattern === "2-1-1"
+      ? "lg:[grid-template-columns:2fr_1fr_1fr]"
+      : "lg:[grid-template-columns:1fr_1fr_2fr]";
+
+  // Height values increased by 20% from previous: 140 -> 168, 180 -> 216, 220 -> 264
+  return (
+    <div className={`grid gap-x-8 gap-y-12 grid-cols-1 md:grid-cols-2 ${colsClass}`}>
+      {items.map((project, index) => (
+        <div
+          key={project.id}
+          className="project-card-hover cursor-pointer roundedlg overflow-hidden shadow-[var(--shadow-elegant)] bg-card flex flex-col"
+          style={{ animationDelay: `${index * 100}ms` }}
+          onClick={() => onClick(project)}
+        >
+          {/* Image Container */}
+          <div className="relative overflow-hidden h-[168px] md:h-[216px] lg:h-[264px] group">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            {/* Overlay */}
+            <div className="absolute inset-0 image-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+              <span className="text-white font-poppins text-sm font-medium">View Details →</span>
+            </div>
+          </div>
+          {/* Content */}
+          <div className="pt-6 px-6 pb-8 flex-1 flex flex-col">
+            <h3 className="font-monasans font-semibold text-heading mb-3 text-lg md:text-xl">
+              {project.title}
+            </h3>
+            <p className="font-poppins text-sm text-body mb-3 leading-5 flex-1">
+              {project.description}
+            </p>
+            <div className="flex items-center gap-2 font-lora italic text-muted-foreground text-sm mt-auto">
+              <span>{project.category}</span>
+              <span>•</span>
+              <span className="flex items-center gap-1">
+                <MapPin className="w-3 h-3" />
+                {project.location}
+              </span>
+              <span>•</span>
+              <span>{project.year}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const LatestProject = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // Split projects into two rows of 3 for the alternating grid
+  const row1 = projects.slice(0, 3);
+  const row2 = projects.slice(3, 6);
 
   return (
     <section className="py-20 px-4 md:px-8 lg:px-16 bg-color">
@@ -93,57 +161,14 @@ const LatestProject = () => {
           </p>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              className="project-card-hover
-              cursor-pointer roundedlg overflow-hidden hadow-[var(--shadow-elegant)]"
-              style={{ animationDelay: `${index * 100}ms` }}
-              onClick={() => setSelectedProject(project)}
-            >
-              {/* Image Container */}
-              <div className="relative h-64 overflow-hidden group">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                 layout='fill'
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 image-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                  <span className="text-white font-poppins text-sm font-medium">View Details →</span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="pt-6">
-                <h3 className="font-monasans font-semibold   text-heading mb-3">
-                  {project.title}
-                </h3>
-                <p className="font-poppins text-sm  text-body mb-3 leading-5  ">
-                  {project.description}
-                </p>
-                <div className="flex items-center gap-2 font-lora italic text-muted-foreground text-sm">
-                  <span>{project.category}</span>
-                  <span>•</span>
-                  <span className="flex items-center gap-1">
-                    <MapPin className="w-3 h-3" />
-                    {project.location}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-
+        {/* Projects Grid with 2fr 1fr 1fr and 1fr 1fr 2fr alternating layout */}
+        <ProjectRow items={row1} pattern="2-1-1" onClick={setSelectedProject} />
+        <div className="h-12 lg:h-16" />
+        <ProjectRow items={row2} pattern="1-1-2" onClick={setSelectedProject} />
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <button className="px-8 py-4 bg-black text-white font-monasans font-semibold rounded-lg
-          cursor-pointer">
+          <button className="px-8 py-4 bg-black text-white font-monasans font-semibold rounded-lg cursor-pointer">
             View All Projects
           </button>
         </div>
@@ -165,7 +190,7 @@ const LatestProject = () => {
                 src={selectedProject.image}
                 alt={selectedProject.title}
                 className="w-full h-full object-cover"
-                layout='fill'
+                fill
               />
               <button
                 onClick={() => setSelectedProject(null)}

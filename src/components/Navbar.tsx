@@ -1,195 +1,177 @@
 "use client"
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Search, Menu, X } from "lucide-react"
+import { useEffect, useState } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  // State to track mobile menu of open/close
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [vh, setVh] = useState(600)
+
+  const { scrollY } = useScroll()
+  const scale = useTransform(scrollY, [0, 8], [1, 0.95])
+  const hideEnd = vh * 0.9 // end when ~first screen is scrolled
+  const groupY = useTransform(scrollY, [0, hideEnd], [0, -80], { clamp: true })
+  const groupOpacity = useTransform(scrollY, [0, hideEnd], [1, 0], {
+    clamp: true,
+  })
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Check if scroll is even greater than 0
-      if (window.scrollY > 0) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll)
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
   useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth >= 768) setMobileMenuOpen(false)
-    }
+    const onResize = () => setVh(window.innerHeight || 600)
+    onResize()
     window.addEventListener("resize", onResize)
     return () => window.removeEventListener("resize", onResize)
   }, [])
 
   useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileMenuOpen(false)
-    }
-    window.addEventListener("keydown", onKeyDown)
-    return () => window.removeEventListener("keydown", onKeyDown)
-  }, [])
-
-  useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : ""
+    document.body.style.overflow = menuOpen ? "hidden" : ""
     return () => {
       document.body.style.overflow = ""
     }
-  }, [mobileMenuOpen])
-
-  const BG_COLOR_CLASS = "bg-[#F5F5DC]" 
-
-  // HEADER CONTAINER CLASSES 
-  // Controls top position, overall height, and text color
-  // The header itself remains transparent, but its content shifts
-  const headerClasses = `
-    fixed w-full z-50 font-montserrat 
-    transition-all duration-300 ease-in-out
-    ${scrolled || mobileMenuOpen ? "top-0 py-3" : "top-8 py-4"} 
-    ${scrolled || mobileMenuOpen ? "text-stone-800" : "text-[#dce0df]"} 
-    overflow-hidden 
-  `
-
-  // This layer holds the background color and slides up
-  const bgLayerClasses = `
-    absolute inset-0 
-    ${BG_COLOR_CLASS} shadow-lg 
-    transition-transform duration-500 ease-out 
-    ${scrolled || mobileMenuOpen ? "translate-y-0" : "translate-y-full"} 
-  `
-
-  //  CONTENT CONTAINER CLASSES
-  const contentContainerClasses = "relative mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-10"
-
-  // ICON & LINK COLOR CLASSES 
-  const searchIconClasses = `
-    cursor-pointer rotate-90 transition-colors duration-300
-    ${scrolled || mobileMenuOpen ? "text-stone-600" : "text-white"}
-  `
-
-  const linkClasses = `
-    transition-colors duration-300
-    ${scrolled ? "hover:text-stone-900" : "hover:text-white"}
-  `
+  }, [menuOpen])
 
   return (
-    <header className={headerClasses}>
-      {/*  Background Layer (Slides Up on Scroll) */}
-      <div className={bgLayerClasses} />
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 p-8 transition-colors duration-300 ${
+        scrolled ? "" : "bg-transparent"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl flex items-center justify-between">
+        <motion.h1
+          className={`text-2xl md:text-5xl font-roboto font-pp font-semibold tracking-wide ${
+            scrolled ? "text-foreground" : "text-white"
+          }`}
+          style={{ y: groupY, opacity: groupOpacity }}
+        >
+          VÉR Architecture
+        </motion.h1>
+        {/* Desktop nav */}
+        <motion.nav
+          className="hidden md:flex items-center gap-2 uppercase text-sm font-medium font-faktmedium ml-16"
+          style={{ y: groupY, opacity: groupOpacity }}
+        >
+          <a
+            className={`${scrolled ? "text-foreground/90 hover:text-foreground" : "text-white/90 hover:text-white"}`}
+            href="#"
+          >
+            Works,
+          </a>
+          <a
+            className={`${scrolled ? "text-foreground/90 hover:text-foreground" : "text-white/90 hover:text-white"}`}
+            href="#"
+          >
+            Creative,
+          </a>
+          <a
+            className={`${scrolled ? "text-foreground/90 hover:text-foreground" : "text-white/90 hover:text-white"}`}
+            href="#"
+          >
+            Process,
+          </a>
+          <a
+            className={`${scrolled ? "text-foreground/90 hover:text-foreground" : "text-white/90 hover:text-white"}`}
+            href="/blogs"
+          >
+            Blogs
+          </a>
+        </motion.nav>
 
-      {/*  Actual Navigation Content */}
-      <div className={contentContainerClasses}>
-        <h1 className="text-lg font-monasans font-semibold">NORM ARCHITECTS</h1>
-
-        {/* Desktop navigation */}
-        <nav className="hidden md:block">
-          <ul className="flex gap-x-8 lg:gap-x-10 font-poppins text-sm">
-            <li>
-              <Link href="/" className={linkClasses}>
-                Architecture
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className={linkClasses}>
-                Design
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className={linkClasses}>
-                Creative
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className={linkClasses}>
-                Videos
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className={linkClasses}>
-                Studio
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className={linkClasses}>
-                Press
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/*  mobile toggle + search */}
         <div className="flex items-center gap-3">
           <button
-            type="button"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-nav"
-            className={`md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${scrolled || mobileMenuOpen ? "text-stone-700 hover:text-stone-900 focus-visible:ring-stone-400" : "text-white hover:text-white/80 focus-visible:ring-white/40"}`}
-            onClick={() => setMobileMenuOpen((v) => !v)}
+            className={`hidden md:inline-flex cursor-pointer px-6 py-3 rounded-full font-medium group items-center gap-4 transition-colors ${
+              scrolled ? "bg-black/90 text-white" : "bg-black text-white"
+            }`}
+            aria-label="Get in touch"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            <span className="sr-only">{mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}</span>
+            <div className="relative overflow-hidden">
+              <p className="transform transition-transform duration-[600ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-full">
+                Get in touch
+              </p>
+              <p className="absolute left-0 top-full transform transition-transform duration-[600ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-full">
+                Get in touch
+              </p>
+            </div>
+            <div
+              className={`w-2 h-2 rounded-full border transition-all duration-300 ease-in-out group-hover:scale-75 ${
+                scrolled ? "border-background bg-white" : "border-white group-hover:bg-white"
+              }`}
+            ></div>
           </button>
 
-          <Search className={searchIconClasses} />
+          {/* Mobile menu button */}
+          <button
+            className={`md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-border ${
+              scrolled ? "text-foreground" : "text-white"
+            }`}
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+          >
+            <span className="sr-only">Menu</span>
+            <div className="relative w-5 h-5">
+              <span
+                className={`absolute left-0 right-0 top-1 block h-[2px] bg-current transition-transform ${
+                  menuOpen ? "translate-y-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 right-0 top-2.5 block h-[2px] bg-current transition-opacity ${
+                  menuOpen ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`absolute left-0 right-0 top-4 block h-[2px] bg-current transition-transform ${
+                  menuOpen ? "-translate-y-2 -rotate-45" : ""
+                }`}
+              />
+            </div>
+          </button>
         </div>
       </div>
 
-      {/* Mobile full-screen overlay menu */}
-      <div
-        id="mobile-nav"
-        className={`
-          md:hidden fixed inset-0 z-[60]
-          ${BG_COLOR_CLASS}
-          transition-opacity duration-300 ease-out
-          ${mobileMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"}
-        `}
+      <motion.div
+        className={`md:hidden fixed inset-0 z-40 transition-opacity duration-300 ${
+          menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        style={{ scale }}
       >
-        <nav role="navigation" aria-label="Main" className="h-full overflow-y-auto">
-          <ul className="flex h-full flex-col gap-6 px-6 py-10 font-poppins text-xl">
+        <div className="absolute inset-0 bg-black/40" onClick={() => setMenuOpen(false)} />
+        <motion.nav
+          className={`absolute top-0 right-0 h-full w-72 bg-[#f8f6e8] shadow-xl p-6 transition-transform duration-300 ${
+            menuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          style={{ scale }}
+        >
+          <ul className="mt-14 grid gap-4 uppercase font-pp text-[#1a1a1a]">
             <li>
-              <Link href="/" className={linkClasses} onClick={() => setMobileMenuOpen(false)}>
-                Architecture
-              </Link>
+              <a href="#" onClick={() => setMenuOpen(false)}>
+                Works
+              </a>
             </li>
             <li>
-              <Link href="/" className={linkClasses} onClick={() => setMobileMenuOpen(false)}>
-                Design
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className={linkClasses} onClick={() => setMobileMenuOpen(false)}>
+              <a href="#" onClick={() => setMenuOpen(false)}>
                 Creative
-              </Link>
+              </a>
             </li>
             <li>
-              <Link href="/" className={linkClasses} onClick={() => setMobileMenuOpen(false)}>
-                Videos
-              </Link>
+              <a href="#" onClick={() => setMenuOpen(false)}>
+                Process
+              </a>
             </li>
             <li>
-              <Link href="/" className={linkClasses} onClick={() => setMobileMenuOpen(false)}>
-                Studio
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className={linkClasses} onClick={() => setMobileMenuOpen(false)}>
-                Press
-              </Link>
+              <a href="#" onClick={() => setMenuOpen(false)}>
+                Blogs
+              </a>
             </li>
           </ul>
-        </nav>
-      </div>
+        </motion.nav>
+      </motion.div>
     </header>
   )
 }

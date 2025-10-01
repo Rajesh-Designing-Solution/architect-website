@@ -45,7 +45,7 @@ function HospitalityProjects() {
         <h2 className=" font-monasans font-bold mb-16 tracking-widest text-center"> HOSPITALITY PROJECTS </h2>
 
          <div className="grid  grid-cols-1 md:grid-cols-2  gap-8">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <div
               key={project.id}
               className="project-card-hover 
