@@ -1,15 +1,30 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+
+import type { Metadata } from "next";
+import {  Poppins, Lora, Mona_Sans } from "next/font/google";
+import "./globals.css";
+import Navbar from "./components/Navbar";
+
+// Montserrat for headings / logo
+const monasans = Mona_Sans({
+  variable: "--font-monasans",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Poppins for nav links, buttons, body
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+// Lora for paragraphs or special sections
+const lora = Lora({
+  variable: "--font-lora",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -19,14 +34,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${monasans.variable} ${poppins.variable} ${lora.variable} antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>
