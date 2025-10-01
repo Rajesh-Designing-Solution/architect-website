@@ -94,11 +94,12 @@ const LatestProject = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className="project-card-hover cursor-pointer rounded-lg overflow-hidden bg-white shadow-[var(--shadow-elegant)]"
+              className="project-card-hover
+              cursor-pointer roundedlg overflow-hidden hadow-[var(--shadow-elegant)]"
               style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => setSelectedProject(project)}
             >
@@ -117,11 +118,11 @@ const LatestProject = () => {
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <h3 className="text-2xl font-monasans font-semibold text-heading mb-2">
+              <div className="pt-6">
+                <h3 className="font-monasans font-semibold   text-heading mb-3">
                   {project.title}
                 </h3>
-                <p className="font-poppins  text-body mb-4 leading-relaxed ">
+                <p className="font-poppins text-sm  text-body mb-3 leading-5  ">
                   {project.description}
                 </p>
                 <div className="flex items-center gap-2 font-lora italic text-muted-foreground text-sm">
@@ -136,6 +137,8 @@ const LatestProject = () => {
             </div>
           ))}
         </div>
+
+
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
@@ -153,7 +156,7 @@ const LatestProject = () => {
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-in"
+            className="bg-color rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header Image */}
@@ -222,3 +225,11 @@ const LatestProject = () => {
 };
 
 export default LatestProject;
+
+
+
+
+
+
+
+
