@@ -12,11 +12,8 @@ function page() {
         <BigImage></BigImage>
         <HospitalityProjects/>
       </main>
-      
     </div>
-  )
+  );
 }
 
-export default page
-
-
+export default page;

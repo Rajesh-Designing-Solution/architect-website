@@ -1,6 +1,45 @@
 @import "tailwindcss";
 
+/* Local font faces from public/fonts */
+@font-face {
+  font-family: "Fakt";
+  src: url("/fonts/faktNormal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
+@font-face {
+  font-family: "Fakt";
+  src: url("/fonts/faktMedium.woff2") format("woff2");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Local";
+  src: url("/fonts/roboto.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Local";
+  src: url("/fonts/robotoMedium.woff2") format("woff2");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Thin Local";
+  src: url("/fonts/thin.woff2") format("woff2");
+  font-weight: 100 200;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Headings / Logo → Montserrat */
 .font-monasans {
@@ -29,3 +68,15 @@
 .text-color{
  color: #222222;
 }
+
+/* Default body font to local Fakt Normal */
+body {
+  font-family: "Fakt", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* Local font utility classes */
+.font-faktnormal { font-family: "Fakt", sans-serif; font-weight: 400; }
+.font-faktmedium { font-family: "Fakt", sans-serif; font-weight: 500; }
+.font-roboto { font-family: "Roboto Local", sans-serif; font-weight: 400; }
+.font-robotomedium { font-family: "Roboto Local", sans-serif; font-weight: 500; }
+.font-thin { font-family: "Thin Local", sans-serif; font-weight: 100; }
