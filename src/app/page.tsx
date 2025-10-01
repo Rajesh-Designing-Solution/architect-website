@@ -3,6 +3,9 @@ import Hero from "@/components/Hero";
 import BigImage from "../components/BigImage"
 import HospitalityProjects from "../components/HospitalityProjects"
 import LatestProject from "@/components/LatestProject";
+import SoftMinimal from "@/components/SoftMinimal";
+import InResidence from "@/components/InResidence";
+import InteriorDesignVideo from "@/components/InteriorDesignVideo";
 function page() {
   return (
     <div>
@@ -11,6 +14,9 @@ function page() {
         <LatestProject></LatestProject>
         <BigImage></BigImage>
         <HospitalityProjects/>
+        <SoftMinimal/>
+        <InResidence/>
+        <InteriorDesignVideo/>
       </main>
     </div>
   );
