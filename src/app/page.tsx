@@ -1,8 +1,8 @@
 // import Hero from "./components/Hero"
-import Hero from "./components/Hero"
-import LatestProject from "./components/LatestProject"
+import Hero from "@/components/Hero";
 import BigImage from "../components/BigImage"
 import HospitalityProjects from "../components/HospitalityProjects"
+import LatestProject from "@/components/LatestProject";
 function page() {
   return (
     <div>
