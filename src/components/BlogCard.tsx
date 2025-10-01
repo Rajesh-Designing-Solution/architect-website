@@ -4,8 +4,8 @@ import React from "react";
 
 const BlogCard = () => {
   return (
-    <Link href={"/blogs/1"}>
-      <div className="w-full">
+    <Link href={"/blogs/1"} passHref>
+      <div className="w-full h-96">
         <div className="w-full h-[90%]">
           <img
             src="/blogs/blog1.jfif"

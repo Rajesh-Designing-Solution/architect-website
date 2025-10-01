@@ -3,20 +3,20 @@ import BlogCard from "@/components/BlogCard";
 export default function BlogId() {
   return (
     <div className="bg-color">
-      <div className="w-full flex ">
-        <div id="left" className="w-1/2 h-screen bg-amber-500">
+      <div className="w-full flex flex-col md:flex-row">
+        <div id="left" className="w-full md:w-1/2 h-screen bg-amber-500">
           <img src="/blogs/blogId1.0.jfif" alt="" className="w-full h-full" />
         </div>
         <div
           id="right"
-          className="w-1/2 pt-28 pl-10 flex flex-col justify-between"
+          className="w-full md:w-1/2 pt-10 md:pt-28 pl-10 flex flex-col justify-between"
         >
           <div>
             <h1 className="text-5xl text-zinc-800 font-semibold ">
               Urban Visions
             </h1>
 
-            <h3 className="w-[70%] text-2xl my-8 text-zinc-700">
+            <h3 className="w-full md:w-[70%] text-2xl my-8 text-zinc-700">
               This project offers a contemporary reading of a modernist
               apartment, in a sober, bright and controlled intervention.
             </h3>
@@ -48,7 +48,9 @@ export default function BlogId() {
         </div>
       </div>
 
-      <div className="w-[50%] mx-auto py-28 flex flex-col space-y-4 text-lg text-zinc-600">
+      <div className="md:hidden border-t border-zinc-400 w-[60%] mx-auto"></div>
+
+      <div className="w-[80%] md:w-[50%] mx-auto py-10 md:py-28 flex flex-col space-y-4 text-lg text-zinc-600">
         <h4>
           A stone's throw from the Eiffel Tower, in a residence from the 1960s,
           this project is fully in line with the subjects that the agency likes:
@@ -89,13 +91,21 @@ export default function BlogId() {
         </h4>
       </div>
 
-      <div className="flex items-center justify-center max-w-4xl mx-auto gap-6 h-96 bg-amber-400">
-          <img src="/blogs/blogId1.1.jfif" alt="blogIdImg" className="object-cover h-full" />
-          <img src="/blogs/blogId1.2.jfif" alt="blogIdImg" className="object-cover h-full" />
+      <div className="flex items-center justify-center max-w-4xl mx-auto gap-6 h-48 md:h-96">
+        <img
+          src="/blogs/blogId1.1.jfif"
+          alt="blogIdImg"
+          className="object-cover h-full"
+        />
+        <img
+          src="/blogs/blogId1.2.jfif"
+          alt="blogIdImg"
+          className="object-cover h-full"
+        />
       </div>
 
-      <div className="max-w-5xl mx-auto py-24">
-        <h3 className="text-2xl text-zinc-800">
+      <div className="max-w-5xl mx-auto px-8 lg:px-0 py-24">
+        <h3 className="text-lg md:text-2xl text-zinc-800">
           The accommodation has a distinctive shape with a rounded glass facade
           out against the park. The concrete walls are core insulated and can
           thus stand as they are. The idea was to create contrasted surfaces,
@@ -105,11 +115,10 @@ export default function BlogId() {
         </h3>
       </div>
 
-      <div className="h-screen px-10">
-        <h3 className="text-3xl text-zinc-800 mb-4">More Projects</h3>
-        <div className="w-full h-[80%] flex gap-x-20">
-          {/* <img src="/blogs/blogId1.4.jfif" alt="MoreImg" className="w-1/2" />
-          <img src="/blogs/blogId1.5.jfif" alt="MoreImg" className="w-1/2" /> */}
+      <div className="max-w-5xl mx-auto pb-24 px-8 lg:px-0">
+        <h3 className="text-3xl text-zinc-800 mb-4">More Blogs</h3>
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 gap-y-20">
+          <BlogCard />
           <BlogCard />
           <BlogCard />
         </div>
