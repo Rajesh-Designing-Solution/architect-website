@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import BigImage from "../components/BigImage";
 import HospitalityProjects from "../components/HospitalityProjects";
 import LatestProject from "@/components/LatestProject";
-import SoftMinimal from "@/components/SoftMinimal";
 import InResidence from "@/components/InResidence";
 import InteriorDesignVideo from "@/components/InteriorDesignVideo";
 import Navbar from "@/components/Navbar";
@@ -18,9 +17,8 @@ function page() {
         <LatestProject />
         <BigImage />
         <HospitalityProjects />
-        <SoftMinimal />
+                <InteriorDesignVideo />
         <InResidence />
-        <InteriorDesignVideo />
         <ContactSection />
         <Footer />
       </main>

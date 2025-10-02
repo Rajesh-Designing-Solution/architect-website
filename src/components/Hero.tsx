@@ -1,63 +1,116 @@
-"use client"
-import { useState, useEffect, useCallback } from "react"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+"use client";
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
+    {
+    id: 10,
+    src: "/images/15.jpg",
+    title: "Ambient Lighting Design",
+    description:
+      "We at VER-A, believe lighting should be subtle, not sharp. Our projects incorporate layered lighting schemes—a mix of ambient, task, and accent lighting—to sculpt the space and enhance material textures after sunset.",
+  },
   {
     id: 1,
-    src: "/images/interior1.jpg",
+    src: "/images/07.jpg",
     title: "Audo House",
     description:
       "In Copenhagen’s evolving Nordhavn district, Audo House redefines how we live, work, and connect. The historic 1918 building has been carefully transformed into a fluid and welcoming destination – uniting café, restaurant, concept shop, event spaces and exclusive residences under one roof.",
   },
   {
     id: 2,
-    src: "/images/interior2.jpg",
+    src: "/images/02.jpg",
     title: "Design Philosophy",
     description:
       "We strive for architectural balance, where the visual and functional aspects of a design are equally weighted. Our focus is on materials, craftsmanship, and timeless aesthetics, creating spaces that foster well-being.",
   },
   {
     id: 3,
-    src: "/images/interior3.jpg",
+    src: "/images/03.jpg",
     title: "Minimalist Interiors",
     description:
       "The interiors are characterized by a refined use of natural materials, soft color palettes, and a minimalist approach to design. Every element is chosen for its quality and ability to create a sense of calm and openness.",
   },
   {
     id: 4,
-    src: "/images/interior5.jpg",
+    src: "/images/09.jpg",
     title: "Norm Architects",
     description:
       'Norm Architects is a multidisciplinary design studio based in Copenhagen, working in the fields of architecture, interior design, industrial design, and artistic direction. Our work is guided by the philosophy of "soft minimalism."',
   },
   {
     id: 5,
-    src: "/images/interior5.jpg",
-    title: "Norm Architects",
+    src: "/images/05.jpg",
+    title: "The Pavilion Residence",
     description:
-      'Norm Architects is a multidisciplinary design studio based in Copenhagen, working in the fields of architecture, interior design, industrial design, and artistic direction. Our work is guided by the philosophy of "soft minimalism."',
+      "A serene residential project in Stockholm, inspired by the surrounding landscape. The design focuses on seamless transitions between indoor and outdoor spaces, utilizing large glass facades and locally sourced stone.",
   },
-]
+  {
+    id: 6,
+    src: "/images/06.jpg",
+    title: "Urban Sanctuary",
+    description:
+      "A concept for a high-rise apartment complex that prioritizes natural light and communal green spaces. The facade incorporates vertical gardens to improve air quality and provide visual relief in a dense city environment.",
+  },
+  {
+    id: 7,
+    src: "/images/12.jpg",
+    title: "The Nordic Kitchen",
+    description:
+      "A celebration of simplicity and functionality. This kitchen design features bespoke light oak cabinetry, honed marble countertops, and integrated appliances to maintain a clean, uncluttered aesthetic.",
+  },
+  {
+    id: 8,
+    src: "/images/13.jpg",
+    title: "Tactile Bathrooms",
+    description:
+      "Focusing on a spa-like experience, this design uses large format micro-cement and textured stone. The absence of harsh lines and the use of indirect lighting promote a sense of relaxation and tranquility.",
+  },
+  {
+    id: 9,
+    src: "/images/14.jpg",
+    title: "Co-working Studio",
+    description:
+      "An open-plan office designed for creative collaboration. Flexible furniture arrangements and acoustic panels wrapped in wool felt ensure both dynamism and focus within a large, airy industrial space.",
+  },
+  {
+    id: 11,
+    src: "/images/16.jpg",
+    title: "Sustainable Materiality",
+    description:
+      "Our commitment to sustainability is reflected in our material choices: reclaimed wood, recycled metals, and low-VOC finishes. We favor materials that age gracefully and tell a story over time.",
+  },
+  {
+    id: 12,
+    src: "/images/17.jpg",
+    title: "Attention to Detail",
+    description:
+      "True luxury lies in the unseen details. From perfectly aligned grain on wood panels to custom-designed door handles and concealed storage solutions, every joint and transition is meticulously considered.",
+  },
+];
 
-const AUTO_SLIDE_INTERVAL = 7000
+const AUTO_SLIDE_INTERVAL = 7000;
 // const SLIDE_DURATION = 1000
 
 export default function Hero() {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
-  const [isImageLoaded, setIsImageLoaded] = useState(false)
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // Function to move to the next slide, handles wrap-around
   const nextSlide = useCallback(() => {
-    setCurrentSlideIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1))
-  }, [])
+    setCurrentSlideIndex((prevIndex) =>
+      prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+    );
+  }, []);
 
   // Function to move to the previous slide, handles wrap-around
   const prevSlide = useCallback(() => {
-    setCurrentSlideIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1))
-  }, [])
+    setCurrentSlideIndex((prevIndex) =>
+      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
+    );
+  }, []);
 
   // Function to go to a specific slide (from dots)
   // const goToSlide = useCallback((index: number) => {
@@ -66,14 +119,14 @@ export default function Hero() {
 
   // Automatic Sliding Logic
   useEffect(() => {
-    const slideTimer = setInterval(nextSlide, AUTO_SLIDE_INTERVAL)
-    return () => clearInterval(slideTimer)
-  }, [nextSlide])
+    const slideTimer = setInterval(nextSlide, AUTO_SLIDE_INTERVAL);
+    return () => clearInterval(slideTimer);
+  }, [nextSlide]);
 
   // When slide changes, reset image loaded state
   useEffect(() => {
-    setIsImageLoaded(false)
-  }, [currentSlideIndex])
+    setIsImageLoaded(false);
+  }, [currentSlideIndex]);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
@@ -125,7 +178,7 @@ export default function Hero() {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
           >
             <motion.h2
-              className="text-xl font-faktnormal tracking-wide"
+              className="text-2xl font-faktnormal tracking-wide"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: "easeOut" }}
@@ -133,7 +186,7 @@ export default function Hero() {
               {slides[currentSlideIndex].title}
             </motion.h2>
             <motion.p
-              className="max-w-3xl mt-2 text-sm font-thinn"
+              className="max-w-4xl mt-2 font-thinn leading-4"
               initial={{ opacity: 0, y: 11 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: "easeOut", delay: 0.05 }}
@@ -207,5 +260,5 @@ export default function Hero() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

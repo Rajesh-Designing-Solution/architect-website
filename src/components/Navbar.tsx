@@ -1,52 +1,85 @@
-"use client"
-import { useEffect, useState } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import Link from "next/link"
+"use client";
+import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [vh, setVh] = useState(600)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [vh, setVh] = useState(500);
+  const [mounted, setMounted] = useState(false);
 
-  const { scrollY } = useScroll()
-  const scale = useTransform(scrollY, [0, 8], [1, 0.95])
-  const hideEnd = vh * 0.9 // end when ~first screen is scrolled
-  const groupY = useTransform(scrollY, [0, hideEnd], [0, -80], { clamp: true })
+  const { scrollY } = useScroll();
+  const scale = useTransform(scrollY, [0, 6], [1, 0.85]);
+
+  const hideEnd = vh * 0.3;
+
+  const groupY = useTransform(scrollY, [0, hideEnd], [0, -80], { clamp: true });
   const groupOpacity = useTransform(scrollY, [0, hideEnd], [1, 0], {
     clamp: true,
-  })
+  });
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
-    const onResize = () => setVh(window.innerHeight || 600)
-    onResize()
-    window.addEventListener("resize", onResize)
-    return () => window.removeEventListener("resize", onResize)
-  }, [])
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : ""
+    const onResize = () => setVh(window.innerHeight || 600);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
-      document.body.style.overflow = ""
-    }
-  }, [menuOpen])
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const getNavLinkClass = () => {
+    const colorClasses = scrolled
+      ? "text-white/70 hover:text-foreground"
+      : "text-white/90 hover:text-white";
+
+    const underlineClasses = `
+      relative inline-block 
+      after:content-[''] after:absolute after:bottom-0 after:left-0 
+      after:h-0.5 after:w-full after:bg-current 
+      after:transition-transform after:duration-300
+      
+      after:origin-bottom-right after:scale-x-0
+      
+      hover:after:scale-x-100 hover:after:origin-bottom-left
+      
+      whitespace-nowrap
+    `;
+
+    return `${colorClasses} ${underlineClasses}`.replace(/\s+/g, " ").trim();
+  };
+
+  const navLinkClass = getNavLinkClass();
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -60, opacity: 0 }}
+      animate={mounted ? { y: 0, opacity: 1 } : {}}
+      transition={{ type: "spring", stiffness: 80, damping: 18, delay: 0.1 }}
       className={`fixed top-0 left-0 right-0 z-50 p-8 transition-colors duration-300 ${
         scrolled ? "" : "bg-transparent"
       }`}
     >
       <div className="mx-auto max-w-7xl flex items-center justify-between">
         <motion.h1
-          className={`text-2xl md:text-5xl font-roboto font-pp font-semibold tracking-wide ${
-            scrolled ? "text-foreground" : "text-white"
+          className={`text-3xl md:text-4xl font-roboto font-pp font-semibold tracking-wide ${
+            scrolled ? "text-white/70" : "text-white"
           }`}
           style={{ y: groupY, opacity: groupOpacity }}
         >
@@ -54,31 +87,19 @@ const Navbar = () => {
         </motion.h1>
         {/* Desktop nav */}
         <motion.nav
-          className="hidden md:flex items-center gap-2 uppercase text-sm font-medium font-faktmedium ml-16"
+          className="hidden md:flex items-center gap-8 uppercase text-sm font-medium font-faktmedium ml-16"
           style={{ y: groupY, opacity: groupOpacity }}
         >
-          <a
-            className={`${scrolled ? "text-foreground/90 hover:text-foreground" : "text-white/90 hover:text-white"}`}
-            href="#"
-          >
-            Works,
+          <a className={navLinkClass} href="#">
+            Works
           </a>
-          <a
-            className={`${scrolled ? "text-foreground/90 hover:text-foreground" : "text-white/90 hover:text-white"}`}
-            href="#"
-          >
-            Creative,
+          <a className={navLinkClass} href="#">
+            Creative
           </a>
-          <a
-            className={`${scrolled ? "text-foreground/90 hover:text-foreground" : "text-white/90 hover:text-white"}`}
-            href="#"
-          >
-            Process,
+          <a className={navLinkClass} href="#">
+            Process
           </a>
-          <Link
-            className={`${scrolled ? "text-foreground/90 hover:text-foreground" : "text-white/90 hover:text-white"}`}
-            href="/blogs"
-          >
+          <Link className={navLinkClass} href="/blogs">
             Blogs
           </Link>
         </motion.nav>
@@ -100,7 +121,9 @@ const Navbar = () => {
             </div>
             <div
               className={`w-2 h-2 rounded-full border transition-all duration-300 ease-in-out group-hover:scale-75 ${
-                scrolled ? "border-background bg-white" : "border-white group-hover:bg-white"
+                scrolled
+                  ? "border-background bg-white"
+                  : "border-white group-hover:bg-white"
               }`}
             ></div>
           </button>
@@ -108,7 +131,7 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <button
             className={`md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-border ${
-              scrolled ? "text-foreground" : "text-white"
+              scrolled ? "text-white/70" : "text-white"
             }`}
             onClick={() => setMenuOpen((v) => !v)}
             aria-expanded={menuOpen}
@@ -142,7 +165,10 @@ const Navbar = () => {
         }`}
         style={{ scale }}
       >
-        <div className="absolute inset-0 bg-black/40" onClick={() => setMenuOpen(false)} />
+        <div
+          className="absolute inset-0 bg-black/40"
+          onClick={() => setMenuOpen(false)}
+        />
         <motion.nav
           className={`absolute top-0 right-0 h-full w-72 bg-[#f8f6e8] shadow-xl p-6 transition-transform duration-300 ${
             menuOpen ? "translate-x-0" : "translate-x-full"
@@ -173,8 +199,8 @@ const Navbar = () => {
           </ul>
         </motion.nav>
       </motion.div>
-    </header>
-  )
-}
+    </motion.header>
+  );
+};
 
-export default Navbar
+export default Navbar;
