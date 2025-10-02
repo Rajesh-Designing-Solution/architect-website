@@ -72,8 +72,8 @@ const Navbar = () => {
       initial={{ y: -60, opacity: 0 }}
       animate={mounted ? { y: 0, opacity: 1 } : {}}
       transition={{ type: "spring", stiffness: 80, damping: 18, delay: 0.1 }}
-      className={`fixed top-0 left-0 right-0 z-50 p-8 transition-colors duration-300 ${
-        scrolled ? "" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 p-8 px-12 transition-colors duration-300 ${
+        scrolled ? " " : "bg-transparent"
       }`}
     >
       <div className="mx-auto max-w-7xl flex items-center justify-between">

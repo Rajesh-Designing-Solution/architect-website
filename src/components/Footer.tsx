@@ -3,7 +3,7 @@ const Footer = () => {
     <footer className="bg-secondary text-secondary-foreground py-12 px-8 md:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Top Section - 3 Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-8 md:gap-16 lg:gap-24 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-8 md:gap-16 lg:gap-24 mb-16">
           {/* Logo - Left */}
           <div className="flex items-start">
             <h2 className="text-[56px] md:text-[72px] lg:text-[80px] font-bold tracking-tight leading-none">VÉR-A</h2>
@@ -11,14 +11,14 @@ const Footer = () => {
 
           {/* Address - Center */}
           <div className="flex flex-col justify-start space-y-0.5">
-            <p className="text-base md:text-lg">36 Boulevard de la Bastille</p>
-            <p className="text-base md:text-lg">75012 Paris</p>
+            <p className="text-base ">36 Boulevard de la Bastille</p>
+            <p className="text-base">75012 Paris</p>
           </div>
 
           {/* Contact - Right */}
           <div className="flex flex-col justify-start space-y-0.5 md:text-right">
-            <p className="text-base md:text-lg">contact@verarchitecture.com</p>
-            <p className="text-base md:text-lg">+33 (0)6 32 79 59 38</p>
+            <p className="text-base">contact@verarchitecture.com</p>
+            <p className="text-base">+33 (0)6 32 79 59 38</p>
           </div>
         </div>
 

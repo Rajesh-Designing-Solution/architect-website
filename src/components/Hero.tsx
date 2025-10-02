@@ -171,7 +171,7 @@ export default function Hero() {
         {isImageLoaded && (
           <motion.div
             key={`text-${slides[currentSlideIndex].id}`}
-            className="absolute bottom-24 w-[90%] md:w-fit left-1/2 -translate-x-1/2 text-center text-white px-1 z-20"
+            className="absolute bottom-24 w-[95%] md:w-fit left-1/2 -translate-x-1/2 text-center text-white px-1 z-20"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -186,7 +186,7 @@ export default function Hero() {
               {slides[currentSlideIndex].title}
             </motion.h2>
             <motion.p
-              className="max-w-4xl mt-2 font-thinn leading-4"
+              className=" mt-2 font-thinn leading-4"
               initial={{ opacity: 0, y: 11 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: "easeOut", delay: 0.05 }}

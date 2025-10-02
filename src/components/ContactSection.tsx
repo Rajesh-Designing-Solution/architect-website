@@ -4,26 +4,24 @@ import Image from "next/image";
 const ContactSection = () => {
   return (
     <>
-      <section className="w-full flex items-center justify-center py-20 px-4 bg-color">
-        <div className="rounded-3xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden shadow-xl max-w-7xl w-full">
+      <section className="w-full flex items-center justify-center pt-12 pb-26  px-4 bg-color">
+        <div className="rounded-3xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden shadow-xl max-w-5xl w-full">
           {/* Left Side - Dark Panel */}
           <div className="order-2 bg-black text-white p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
-            <div>
-              <p className="text-white/80 text-lg md:text-xl font-light mb-12">
+              <p className="text-[#ede8d5]/50 font-light  mb-16">
                 Your vision, realized.
               </p>
-            </div>
 
             <div className="flex-1 flex flex-col justify-center">
-              <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+              <h1 className="text-white text-5xl md:text-6xl font-bold leading-tight">
                 Let&apos;s get
                 <br />
                 started.
               </h1>
             </div>
 
-            <div className="mt-10">
-              <button className="inline-flex items-center gap-2 text-base md:text-lg px-8 py-4 bg-white text-black rounded-full cursor-pointer">
+            <div className="mt-20">
+              <button className="inline-flex items-center gap-2 text-base md:text-lg px-8 py-4 bg-white text-black rounded-full cursor-pointer hover:scale-95 transition-all duration-300">
                 Contact Us
                 <ArrowRight className="h-5 w-5" />
               </button>
