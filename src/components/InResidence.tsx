@@ -38,9 +38,9 @@ category: "Residential",
 
 function InResidence() {
   return (
-    <section className="py-20 bg-color px-4 md:px-8 lg:px-16 bg-gray-50">
+    <section className="py-24 bg-color px-4 md:px-8 lg:px-16 bg-gray-50">
       <div className="max-w7xl mx-auto">
-        <h2 className="text-2xl font-pp font-semibold text-heading mb-4 uppercase text-center mb-12 tracking-wide">
+        <h2 className="text-2xl font-pp font-semibold text-heading uppercase text-center mb-12 tracking-wide">
           In {" "} A {" "} Residence
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
