@@ -3,17 +3,15 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 
-const BlogCard = () => {
+const BlogCard = ({ image, index }: { image: string; index: number }) => {
   return (
-    <Link href={"/blogs/1"} passHref>
-      <div className="w-full h-96">
-        <div className="w-full h-[90%] relative">
-          <Image
-            src="/blogs/blog1.jfif"
+    <Link href={`/blogs/${index}`} passHref>
+      <div className="w-full h-80 group">
+        <div className="w-full h-[90%] overflow-hidden">
+          <img
+            src={image}
             alt="blogImg"
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover"
+            className="w-full h-full transition-transform duration-300 ease-in-out transform group-hover:scale-105"
           />
         </div>
         <div className="w-full flex justify-between gap-5 px-1 mt-2 text-zinc-600 text-sm">
@@ -23,7 +21,7 @@ const BlogCard = () => {
               Insights into sustainable & modern urban planning
             </p>
           </h4>
-          <ArrowRight className="size-4" />
+          <ArrowRight className="size-4 transition-all duration-300 group-hover:translate-x-1" />
         </div>
       </div>
     </Link>
