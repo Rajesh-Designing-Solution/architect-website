@@ -24,8 +24,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "VÉR Architecture",
-  description: "VÉR Architecture - The best Architectures in hood.",
+  title: "JUFA Arkitekt",
+  description: "JUFA Arkitekt - The best Architectures in hood.",
 };
 
 export default function RootLayout({

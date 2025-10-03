@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,6 +19,11 @@ const Navbar = () => {
   const groupOpacity = useTransform(scrollY, [0, hideEnd], [1, 0], {
     clamp: true,
   });
+
+  //checking url
+  const pathname = usePathname();
+  const isHomePage = pathname === "/" || pathname === "/creative";
+  console.log(isHomePage);
 
   useEffect(() => {
     setMounted(true);
@@ -73,18 +79,27 @@ const Navbar = () => {
       animate={mounted ? { y: 0, opacity: 1 } : {}}
       transition={{ type: "spring", stiffness: 80, damping: 18, delay: 0.1 }}
       className={`fixed top-0 left-0 right-0 z-50 p-8 px-12 transition-colors duration-300 ${
-        scrolled ? " " : "bg-transparent"
+        isHomePage
+          ? scrolled
+            ? ""
+            : "bg-transparent"
+          : `mx-3 max-w-5xl lg:mx-auto mt-3 p-4 sm:p-3 sm:px-6 transition-colors duration-300 ${
+              scrolled ? "rounded-full" : "bg-black rounded-full"
+            }`
       }`}
     >
       <div className="mx-auto max-w-7xl flex items-center justify-between">
-        <motion.h1
-          className={`text-3xl md:text-4xl font-roboto font-pp font-semibold tracking-wide ${
+        <motion.a
+        href="/"
+          className={`${
+            isHomePage ? "text-3xl md:text-4xl" : "text-xl"
+          } font-roboto font-pp font-semibold tracking-wide ${
             scrolled ? "text-white/70" : "text-white"
           }`}
           style={{ y: groupY, opacity: groupOpacity }}
         >
-          VÉR Architecture
-        </motion.h1>
+          JUFA&nbsp;&nbsp;Arkitekt
+        </motion.a>
         {/* Desktop nav */}
         <motion.nav
           className="hidden md:flex items-center gap-8 uppercase text-sm font-medium font-faktmedium ml-16"
@@ -96,8 +111,8 @@ const Navbar = () => {
           <a className={navLinkClass} href="#">
             Creative
           </a>
-          <a className={navLinkClass} href="#">
-            Process
+          <a className={navLinkClass} href="/services">
+            Services
           </a>
           <Link className={navLinkClass} href="/blogs">
             Blogs
@@ -176,7 +191,7 @@ const Navbar = () => {
           style={{ scale }}
         >
           <ul className="mt-14 grid gap-4 uppercase font-pp text-[#1a1a1a]">
-            <li>
+            {/* <li>
               <a href="#" onClick={() => setMenuOpen(false)}>
                 Works
               </a>
@@ -185,10 +200,10 @@ const Navbar = () => {
               <a href="#" onClick={() => setMenuOpen(false)}>
                 Creative
               </a>
-            </li>
+            </li> */}
             <li>
-              <a href="#" onClick={() => setMenuOpen(false)}>
-                Process
+              <a href="/services" onClick={() => setMenuOpen(false)}>
+                Services
               </a>
             </li>
             <li>

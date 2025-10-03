@@ -21,7 +21,7 @@ const Blogs = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-color py-30 px-8 max-w-[1500px] mx-auto">
+      <div className="bg-color py-40 px-8 max-w-[1500px] mx-auto">
         <div className="md:w-[60%] mx-auto">
           <h1 className="text-3xl sm:text-5xl text-center text-zinc-800">
             Designing Tomorrow: Architecture & Innovation
