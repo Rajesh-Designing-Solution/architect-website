@@ -6,7 +6,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-8 md:gap-16 lg:gap-24 mb-16">
           {/* Logo - Left */}
           <div className="flex items-start">
-            <h2 className="text-[56px] md:text-[72px] lg:text-[80px] font-bold tracking-tight leading-none">VÉR-A</h2>
+            <h2 className="text-[56px] md:text-[72px] lg:text-[80px] font-bold tracking-tight leading-none">JUFA</h2>
           </div>
 
           {/* Address - Center */}

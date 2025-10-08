@@ -8,16 +8,18 @@ import InteriorDesignVideo from "@/components/InteriorDesignVideo";
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import Expertise from "@/components/Expertise";
 function page() {
   return (
     <div>
       <main>
         <Navbar />
         <Hero />
+        <Expertise />
         <LatestProject />
         <BigImage />
         <HospitalityProjects />
-                <InteriorDesignVideo />
+        <InteriorDesignVideo />
         <InResidence />
         <ContactSection />
         <Footer />

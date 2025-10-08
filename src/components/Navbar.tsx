@@ -191,7 +191,7 @@ const Navbar = () => {
           style={{ scale }}
         >
           <ul className="mt-14 grid gap-4 uppercase font-pp text-[#1a1a1a]">
-            {/* <li>
+            <li>
               <a href="#" onClick={() => setMenuOpen(false)}>
                 Works
               </a>
@@ -200,7 +200,7 @@ const Navbar = () => {
               <a href="#" onClick={() => setMenuOpen(false)}>
                 Creative
               </a>
-            </li> */}
+            </li>
             <li>
               <a href="/services" onClick={() => setMenuOpen(false)}>
                 Services
